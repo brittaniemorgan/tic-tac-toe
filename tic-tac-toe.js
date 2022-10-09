@@ -15,22 +15,20 @@ window.onload = function(){
     let gameState = ["","","",
                     "","","",
                     "","","",];
+
     /////////////// Part 2
     function fillSquare(event){
-        const tile = event.target;
-        console.log(tile);
-        for (let i = 0; i<9; i++){ //make dependent on win
-            if (player == "X")
-            {
-                tile.innerHTML = "X";
-                tile.classList.add(".square.X");
-                player = "O";
-            }
-            else{
-                tile.innerHTML = "O";
-                tile.classList.add(".square.O");
-                player = "X";
-            }
+        var tile = event.target;
+        console.log(tile); //make dependent on win
+        if (player == "X"){
+            tile.innerHTML = "X";
+            tile.classList.add("X");
+            player = "O";
+        }
+        else{
+            tile.innerHTML = "O";
+            tile.classList.add("O");
+            player = "X";
         }    
     }
 }
