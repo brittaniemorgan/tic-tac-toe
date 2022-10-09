@@ -30,20 +30,21 @@ window.onload = function(){
     function fillSquare(event){
         var tile = event.target;
         let index = tilesList.indexOf(tile);
-
-        if (player == "X"){
-            tile.innerHTML = player;
-            tile.classList.add("X");
-            gameState[index] = player
-            player = "O";
+        if (tile.innerHTML == ""){
+            if (player == "X"){
+                tile.innerHTML = player;
+                tile.classList.add("X");
+                gameState[index] = player
+                player = "O";
+            }
+            else{
+                tile.innerHTML = player;
+                tile.classList.add("O");
+                gameState[index] = player
+                player = "X";
+            }  
+            checkWinner();
         }
-        else{
-            tile.innerHTML = player;
-            tile.classList.add("O");
-            gameState[index] = player
-            player = "X";
-        }  
-        checkWinner();
     }
 
     /////////////// Part 3
