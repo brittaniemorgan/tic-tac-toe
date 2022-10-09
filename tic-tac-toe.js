@@ -90,6 +90,7 @@ window.onload = function(){
 
     function clearBoard(){
         tilesList.forEach(e => e.innerHTML = "");
+        document.querySelector("#status").classList.remove("you-won");
+        document.querySelector("#status").innerHTML = "Move your mouse over a square and click to play an X or an O.";
     }
-
 }
