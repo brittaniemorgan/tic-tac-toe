@@ -83,4 +83,12 @@ window.onload = function(){
         isXWinner();
         isOWinner();
     }
+
+    /////////////// Part 5
+    document.querySelector("button").addEventListener("click", clearBoard);
+
+    function clearBoard(){
+        tilesList.forEach(e => e.innerHTML = "");
+    }
+
 }
