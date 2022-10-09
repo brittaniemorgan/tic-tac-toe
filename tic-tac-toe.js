@@ -10,14 +10,16 @@ window.onload = function(){
 
     /////////Variables
 
-    tilesArr = tilesArr.forEach(tile => tile.addEventListener("click", fillSquare));
+    
     let player = "X";
     let gameState = ["","","",
                     "","","",
                     "","","",];
 
     /////////////// Part 2
+    tilesArr.forEach(tile => tile.addEventListener("click", fillSquare));
     function fillSquare(event){
+        
         var tile = event.target;
         console.log(tile); //make dependent on win
         if (player == "X"){
@@ -30,5 +32,17 @@ window.onload = function(){
             tile.classList.add("O");
             player = "X";
         }    
+    }
+
+    /////////////// Part 3
+    tilesArr.forEach(tile => tile.addEventListener("mouseover", hover));
+    tilesArr.forEach(tile => tile.addEventListener("mouseout", endHover));
+    
+    function hover(event){
+        event.target.classList.add("hover");
+    }
+
+    function endHover(event){
+        event.target.classList.remove("hover");
     }
 }
