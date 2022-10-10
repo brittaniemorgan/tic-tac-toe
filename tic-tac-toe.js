@@ -1,53 +1,55 @@
 window.onload = function(){
+
+    /////////Variables
     let tilesNode = document.querySelectorAll("#board div");
     let tilesList = new Array(9);
-    let winner = undefined;
-    /////////Variables
-    
-        let player = "X";
-        let gameState = ["","","",
+    let player = "X";
+    let gameState = ["","","",
                         "","","",
                         "","","",];
     
 
     boot();
 
-    //////////////// Part 1  
+    //////////////// Layout the Board
         function boot(){
             console.log("boot");
-            tilesNode.forEach(el => el.className = "square");
-            tilesNode.forEach(tile => tile.addEventListener("click", fillSquare));
-            tilesNode.forEach(tile => tile.addEventListener("mouseover", hover));
-            tilesNode.forEach(tile => tile.addEventListener("mouseout", endHover));
             for (let i = 0; i<9;i++){
                 tilesList[i] = tilesNode[i];
             } 
+            tilesList.forEach(tile => tile.className = "square");
+            tilesList.forEach(tile => tile.addEventListener("click", fillSquare));
+            tilesList.forEach(tile => tile.addEventListener("mouseover", hover));
+            tilesList.forEach(tile => tile.addEventListener("mouseout", endHover));
+            document.querySelector("button").addEventListener("click", clearBoard);   
         }
 
 
-    /////////////// Part 2
+    /////////////// Game Play
     
     function fillSquare(event){
         var tile = event.target;
         let index = tilesList.indexOf(tile);
+
         if (tile.innerHTML == ""){
             if (player == "X"){
                 tile.innerHTML = player;
                 tile.classList.add("X");
-                gameState[index] = player
+                gameState[index] = player;
                 player = "O";
             }
+
             else{
                 tile.innerHTML = player;
                 tile.classList.add("O");
-                gameState[index] = player
+                gameState[index] = player;
                 player = "X";
             }  
             checkWinner();
         }
     }
 
-    /////////////// Part 3
+    /////////////// Tile Animation
 
     function hover(event){
         event.target.classList.add("hover");
@@ -59,7 +61,7 @@ window.onload = function(){
 
 
 
-    /////////////// Part 4
+    /////////////// Check for Winner
 
     function isXWinner(){
         if ((gameState[0] == "X" && gameState[1] == "X" && gameState[2] == "X")
@@ -67,6 +69,8 @@ window.onload = function(){
                 ||(gameState[6] == "X" && gameState[7] == "X" && gameState[8] == "X" ))  {
                     document.querySelector("#status").classList.add("you-won");
                     document.querySelector("#status").innerHTML = "Congratulations! X is the Winner!";
+                    tilesList.forEach(el => el.removeEventListener("click", fillSquare));
+                    
                 }      
     }
 
@@ -77,6 +81,7 @@ window.onload = function(){
                 {
                     document.querySelector("#status").classList.add("you-won");
                     document.querySelector("#status").innerHTML = "Congratulations! O is the Winner!";
+                    tilesList.forEach(el => el.removeEventListener("click", fillSquare));
                 } 
     }
 
@@ -85,11 +90,16 @@ window.onload = function(){
         isOWinner();
     }
 
-    /////////////// Part 5
-    document.querySelector("button").addEventListener("click", clearBoard);
+    /////////////// Restart Game
 
     function clearBoard(){
-        tilesList.forEach(e => e.innerHTML = "");
+        tilesList.forEach(el => el.addEventListener("click", fillSquare));
+        gameState =  ["","","",
+                    "","","",
+                    "","","",];
+        player = "X";
+        tilesList.forEach(tile => tile.innerHTML = "");
+        tilesList.forEach(tile => tile.className = "square");
         document.querySelector("#status").classList.remove("you-won");
         document.querySelector("#status").innerHTML = "Move your mouse over a square and click to play an X or an O.";
     }
