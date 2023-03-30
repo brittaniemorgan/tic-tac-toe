@@ -1,3 +1,1 @@
-# info2180-lab3
-
-This is Lab 3 for Brittanie Morgan
+This is an implementation of the tic-tac-toe game.
